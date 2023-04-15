@@ -1,0 +1,21 @@
+:root{
+    --lightPrimary : #E5BEEC;
+    --lightSecondary : #FDE2F3;
+    --darkPrimary : #2A2F4F;
+    --darkSecondary : #917FB3;
+    --focusLight : #F7DB6A;
+    --focusDark : #EBB02D;
+    --bgLight : #f7ebf6;
+    --bgDark : #EBB02D;
+    --fontSmall : 18px;
+    --fontMedium : 24px;
+    --fontLarge : 28px;
+    --fontXLarge : 34px;
+}
+
+
+.HeroParent{
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bgLight);
+}

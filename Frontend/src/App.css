@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+:root{
+    --lightPrimary : #E5BEEC;
+    --lightSecondary : #FDE2F3;
+    --darkPrimary : #2A2F4F;
+    --darkSecondary : #917FB3;
+    --focusLight : #F7DB6A;
+    --focusDark : #EBB02D;
+    --fontSmall : 18px;
+    --fontMedium : 24px;
+    --fontLarge : 28px;
+    --fontXLarge : 34px;
+}
+
+
+a , a:valid , a:active{
+    text-decoration: none;
+    color: inherit;
+}
+
+.Mount{
+    padding-top: 4rem;
+}

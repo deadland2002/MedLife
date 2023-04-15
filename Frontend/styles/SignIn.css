@@ -1,0 +1,19 @@
+.SignInParent{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 4rem);
+    background-color: var(--bgLight);
+}
+
+.SignInParent .wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.SignInParent .right{
+    display: flex;
+    flex-direction: column;
+}
