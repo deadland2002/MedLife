@@ -1,0 +1,6 @@
+.footerParent{
+    padding: 10px 20px;
+    min-height: 40px;
+    background-color: var(--darkPrimary);
+    color: var(--lightPrimary);
+}

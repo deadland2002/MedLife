@@ -4,7 +4,7 @@
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: var(--darkPrimary);
-    color: var(--lightSecondary);
+    color: var(--lightPrimary);
     font-size: var(--fontSmall);
     align-items: center;
     position: fixed;
@@ -27,7 +27,7 @@
 
 .SignIn{
     padding: 5px 20px;
-    border: 2px solid var(--lightSecondary);
+    border: 2px solid var(--lightPrimary);
     border-radius: 20px;
 }
 

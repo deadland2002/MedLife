@@ -5,18 +5,24 @@
 }
 
 :root{
-    --lightPrimary : #E5BEEC;
-    --lightSecondary : #FDE2F3;
-    --darkPrimary : #2A2F4F;
-    --darkSecondary : #917FB3;
+    --lightPrimary : #A5D7E8;
+    --lightSecondary : #576CBC;
+    --darkPrimary : #0B2447;
+    --darkSecondary : #19376D;
     --focusLight : #F7DB6A;
     --focusDark : #EBB02D;
+    --bgLight: #d0eef8;
+    --verified: #b4ff89;
+    --invalid: #ff8080;
+    --lightGray: #7a7a7a;
+
+    --fontXSmall : 12px;
     --fontSmall : 18px;
     --fontMedium : 24px;
     --fontLarge : 28px;
     --fontXLarge : 34px;
-}
 
+}
 
 a , a:valid , a:active{
     text-decoration: none;
@@ -25,4 +31,6 @@ a , a:valid , a:active{
 
 .Mount{
     padding-top: 4rem;
+    min-height: 100vh;
+    background-color: var(--bgLight);
 }

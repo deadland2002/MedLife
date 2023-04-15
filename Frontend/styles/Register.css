@@ -1,5 +1,24 @@
+:root{
+    --lightPrimary : #A5D7E8;
+    --lightSecondary : #576CBC;
+    --darkPrimary : #0B2447;
+    --darkSecondary : #19376D;
+    --focusLight : #F7DB6A;
+    --focusDark : #EBB02D;
+    --bgLight: #d0eef8;
+    --verified: #b4ff89;
+    --invalid: #ff8080;
+    --lightGray: #5a5a5a;
 
-.SignInParent{
+    --fontXSmall : 12px;
+    --fontSmall : 18px;
+    --fontMedium : 24px;
+    --fontLarge : 28px;
+    --fontXLarge : 34px;
+}
+
+
+.SignUpParent{
     display: flex;
     width: 100%;
     justify-content: center;
@@ -8,39 +27,39 @@
     background-color: var(--bgLight);
 }
 
-.SignInParent .wrapper{
+.SignUpParent .wrapper{
     display: flex;
     flex-direction: row;
     gap: 20px;
     background-color: aliceblue;
-    height: 400px;
-    aspect-ratio: 16/9;
+    height: 800px;
+    aspect-ratio: 4/5;
     justify-content: center;
     align-items: center;
     padding: 10px 10px;
     border-radius: 20px;
 }
 
-.SignInParent .right , .SignInParent .signInForm{
+.SignUpParent .right , .SignUpParent .signUpForm{
     display: flex;
     flex-direction: column;
     flex: 1 0 250px;
     gap: 20px;
+    position: relative;
 }
 
-.SignInParent .left{
+.SignUpParent .left{
     flex: 1 0 50px;
     background-color: var(--lightSecondary);
     color: var(--lightPrimary);
 }
 
-.SignInParent .left , .SignInParent .right{
+.SignUpParent .left , .SignUpParent .right{
     height: calc(100% - 20px);
     border-radius: 20px;
     padding: 10px 10px;
 }
-
-.signInForm div{
+.signUpForm div{
     display: flex;
     flex-direction: column;
     width: calc(100% - 60px);
@@ -49,12 +68,12 @@
     color: var(--darkPrimary);
     font-size: var(--fontSmall);
 }
-.signInForm .title{
+.signUpForm .title{
     font-size: var(--fontXLarge);
     align-items: center;
 }
 
-.signInForm input{
+.signUpForm input{
     background-color: transparent;
     border: 0;
     border-bottom: 2px solid var(--darkPrimary);
@@ -62,16 +81,16 @@
     font-size: var(--fontSmall);
 }
 
-.signInForm input:focus{
+.signUpForm input:focus{
     outline: none;
 }
 
-.signInForm .submit{
+.signUpForm .submit{
     display: flex;
     align-items: center;
 }
 
-.signInForm button{
+.signUpForm button{
     width: 200px;
     height: 40px;
     border: 0;
@@ -86,29 +105,39 @@
     transition: all .5s;
 }
 
-.signInForm button:hover{
+.signUpForm button:hover{
     box-shadow: 0px 10px 10px var(--lightSecondary);
 }
 
-.signInForm .verified{
+.signUpForm .verified{
     background-color: var(--verified);
     color: var(--darkSecondary);
 }
 
-.signInForm .invalid{
+.signUpForm .invalid{
     background-color: var(--invalid);
     color: var(--darkPrimary);
 }
 
-.SignInParent .etc{
+.signUpForm .etc{
     font-size: var(--fontXSmall);
     color: var(--lightGray);
-    display: flex;
-    flex-direction: column;
-    padding: 0px 30px;
+    position: absolute;
+    bottom: 0;
 }
 
-.SignInParent .etc a{
+.signUpForm .etc a{
     color: var(--darkPrimary);
     font-weight: bold;
+}
+
+.signUpForm .strength{
+    flex-direction: row;
+    color: var(--lightGray);
+}
+.signUpForm .strengthAnnote{
+    flex-direction: column;
+    color: var(--lightGray);
+    gap: 0;
+    font-size: var(--fontXSmall);
 }
