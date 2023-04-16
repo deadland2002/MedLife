@@ -8,17 +8,6 @@ const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState();
-  useEffect(() => {
-    const token = document.cookie.split(";");
-    if (token) {
-      for (var i of token) {
-        if (i.startsWith("token=")) {
-          var temp = i.split("=");
-          setUser((prev) => ({ ...prev, ["token"]: temp[1] }));
-        }
-      }
-    }
-  }, []);
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>

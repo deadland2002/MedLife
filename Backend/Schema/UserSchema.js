@@ -6,6 +6,7 @@ const Schema = new mongoose.Schema({
     Email:{type:String , require:true},
     Password:{type:String , require:true},
     Phone:{type:String , require:true},
+    Gender:{type:String , require:true},
     Verified:{type:Boolean , default:false},
     Appointments:[
         {

@@ -1,0 +1,17 @@
+.SignInRequiredParent{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.SignInRequiredParent .wrapper{
+    font-size: var(--fontXLarge);
+    color: var(--lightGray);
+}
+
+.SignInRequiredParent .wrapper a{
+    color: var(--darkPrimary);
+    font-weight: bold;
+}

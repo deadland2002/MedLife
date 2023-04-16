@@ -31,6 +31,8 @@ const SignIn = () => {
         ["token"]: response.token,
         ["name"]: response.name,
       }));
+      
+      console.log(user,response.token);
 
       subBtn.current.classList.remove("invalid");
       subBtn.current.classList.add("verified");
@@ -61,7 +63,9 @@ const SignIn = () => {
     <>
       <div className="SignInParent">
         <div className="wrapper">
-          <div className="left">IMG</div>
+          <div className="left">
+            <img src={"/png/bust-mask-12.png"} width={"100%"} />
+          </div>
           <div className="right">
             <form className="signInForm" onSubmit={HandleSubmit}>
               <div className="title">Sign In</div>

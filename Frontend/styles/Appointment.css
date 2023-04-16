@@ -1,0 +1,9 @@
+.AppointmentParent{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+}
+
+.AppointmentParent .title{
+    font-size: var(--fontXLarge);
+}

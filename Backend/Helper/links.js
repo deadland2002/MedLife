@@ -19,6 +19,10 @@ const link = (app) => {
   app.post("/Verify", async function (req, res) {
     Validate.VerifyOtp(req,res);
   });
+  
+  app.post("/VerifyToken", async function (req, res) {
+    Validate.VerifyToken(req,res);
+  });
 };
 
 module.exports = link;
