@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../src/App.jsx";
-import { SignInRequired, AppointmentComponent } from "../Components";
+import { SignInRequired, AppointmentComponent ,PreLoader} from "../Components";
+import "../styles/Appointment.css"
 
 const Appointment = () => {
   const { user, setUser } = useContext(UserContext);
@@ -30,12 +31,12 @@ const Appointment = () => {
             ...response.user,
           }));
         }
-        console.log(response);
-        console.log(user);
       } catch (err) {
         console.log(err);
       }
-      setIfFetching(false);
+      setTimeout(()=>{
+        setIfFetching(false);
+      },2000)
     }
 
     if (token && token.length != 0) {
@@ -61,9 +62,13 @@ const Appointment = () => {
         : []}
 
       {isFetching
-        ? [<div key={2}>isFetching</div>]
+        ? [
+          <div className="PreloaderParent">
+          <PreLoader />
+          </div>
+      ]
         : !isFetching && user
-        ? [<AppointmentComponent user={user} setUser={setUser} />]
+        ? [<AppointmentComponent user={user} setUser={setUser} key={3} />]
         : []}
     </>
   );

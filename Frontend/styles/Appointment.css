@@ -1,3 +1,26 @@
+:root{
+    --lightPrimary : #A5D7E8;
+    --lightSecondary : #576CBC;
+    --darkPrimary : #0B2447;
+    --darkSecondary : #19376D;
+    --focusLight : #F7DB6A;
+    --focusDark : #EBB02D;
+    --bgLight: #d0eef8;
+    --verified: #b4ff89;
+    --invalid: #ff8080;
+    --lightGray: #7a7a7a;
+    --lightBlue: #b1d8f8;
+
+    --fontXSmall : 12px;
+    --fontSmall : 18px;
+    --fontMedium : 24px;
+    --fontLarge : 28px;
+    --fontXLarge : 34px;
+
+}
+
+
+
 .AppointmentParent{
     display: flex;
     flex-direction: column;
@@ -6,4 +29,34 @@
 
 .AppointmentParent .title{
     font-size: var(--fontXLarge);
+}
+
+.AppointmentParent .selectParent{
+    display: flex;
+    padding: 20px 20px;
+    background-color: var(--lightBlue);
+    border-radius: 20px;
+    gap: 20px;
+}
+
+.AppointmentParent .selectParent input , .AppointmentParent .selectParent input:focus{
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    border: 4px solid var(--bgLight);
+    font-size: var(--fontSmall);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.AppointmentParent .selectParent input:not(:placeholder-shown){
+    border-color: var(--lightSecondary);
+}
+
+.PreloaderParent{
+    display: flex;
+    width: 100%;
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
 }

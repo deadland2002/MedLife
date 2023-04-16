@@ -26,6 +26,8 @@ async function SetOtp(email) {
     } else {
       await OtpSchema.updateOne({ Email: email }, { $set: { Otp: OTP } });
     }
+
+    console.log(OTP);
   } catch (err) {
     console.log("Generate Otp - ", err);
   }
@@ -41,7 +43,7 @@ module.exports = {
       if (email && password) {
         try {
           const user = await VerifyUser(email, password);
-          if (user) {
+          if (user && user.Verified) {
             const secret = process.env.JWTSECRET;
             const token = await JWT.sign(
               {
@@ -52,7 +54,7 @@ module.exports = {
               },
               secret
             );
-            return res.header(200).json({ status: 200 , token });
+            return res.header(200).json({ status: 200, token });
           }
         } catch (err) {
           console.log(err);
@@ -64,9 +66,10 @@ module.exports = {
 
   SignUp: async (req, res) => {
     try {
-      const { email, password, phone, fname, sname ,gender } = req.body;
+      const { email, password, phone, fname, sname, gender } = req.body;
       if (email && password && phone && fname && sname && gender) {
-        if (await userSchema.findOne({ Email: email })) return res.header(201).json({ status: 405 });
+        if (await userSchema.findOne({ Email: email }))
+          return res.header(201).json({ status: 405 });
         try {
           const saltRound = parseInt(process.env.SALTROUND);
           var pass = await bcrypt.genSalt(saltRound).then((salt) => {
@@ -80,7 +83,7 @@ module.exports = {
             SName: sname.toUpperCase(),
             Phone: phone,
             Password: pass,
-            Gender: gender.toUpperCase()
+            Gender: gender.toUpperCase(),
           });
           if (user) {
             return res.header(200).json({ status: 200 });
@@ -118,7 +121,9 @@ module.exports = {
             } else {
               return res.header(200).json({ status: 202 });
             }
-          } else if (user) {
+          } else if (user && user.Verified) {
+            return res.header(200).json({ status: 205 });
+          } else if(user){
             await SetOtp(email);
             return res.header(200).json({ status: 201 });
           } else {
@@ -132,34 +137,24 @@ module.exports = {
     return res.header(201).json({ status: 401 });
   },
 
-
-
-
-
   VerifyToken: async (req, res) => {
     try {
       const { token } = req.body;
 
       if (token) {
         try {
-          const user = await JWT.verify(token,process.env.JWTSECRET);
+          const user = await JWT.verify(token, process.env.JWTSECRET);
           if (user) {
-              return res.header(200).json({ status: 200 ,user});
+            return res.header(200).json({ status: 200, user });
           } else {
             return res.header(200).json({ status: 203 });
           }
         } catch (err) {
-          console.log(err);
         }
       }
     } catch (err) {}
     return res.header(201).json({ status: 401 });
   },
-
-
-
-
-
 
   Test: (req, res) => {
     res.send(`<form action='/SignIn' method='post'>

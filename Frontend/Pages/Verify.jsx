@@ -8,6 +8,7 @@ const Verify = () => {
   const [data, setData] = useState({ email: "", password: "", otp: "" });
   const [isVerified, setIsVerified] = useState(false);
   const subBtn = useRef(null);
+  const OtpBtn = useRef(null);
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -26,9 +27,9 @@ const Verify = () => {
 
     if (response.status == 200) {
 
-      subBtn.current.classList.remove("invalid");
-      subBtn.current.classList.add("verified");
-      subBtn.current.innerText = "verified";
+      OtpBtn.current.classList.remove("invalid");
+      OtpBtn.current.classList.add("verified");
+      OtpBtn.current.innerText = "verified";
 
       setTimeout(() => {
         location.href = "/SignIn";
@@ -39,7 +40,20 @@ const Verify = () => {
       subBtn.current.classList.add("invalid");
       subBtn.current.innerText = "retry";
     } else if (response.status == 201) {
-      setIsVerified(true);
+      subBtn.current.classList.remove("invalid");
+      subBtn.current.classList.add("verified");
+      subBtn.current.innerText = "verified";
+      setTimeout(()=>{
+        setIsVerified(true);
+      },1000)
+    } else if (response.status == 205) {
+      subBtn.current.classList.remove("verified");
+      subBtn.current.classList.add("invalid");
+      subBtn.current.innerText = "Already verified";
+    }else if (response.status == 202) {
+      OtpBtn.current.classList.remove("verified");
+      OtpBtn.current.classList.add("invalid");
+      OtpBtn.current.innerText = "retry";
     }
 
     console.log(response);
@@ -105,7 +119,7 @@ const Verify = () => {
                       />
                     </div>
                     <div className="submit">
-                      <button className="" ref={subBtn} type="submit">
+                      <button className="" ref={OtpBtn} type="submit">
                         Verify
                       </button>
                     </div>
@@ -121,7 +135,9 @@ const Verify = () => {
               </span>
             </div>
           </div>
-          <div className="left">IMG</div>
+          <div className="left">
+            <img src="/png/pose-mask-8.png" height={"100%"}/>
+          </div>
         </div>
       </div>
     </>

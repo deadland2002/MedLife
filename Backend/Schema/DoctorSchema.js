@@ -6,11 +6,16 @@ const DoctorSchema = new mongoose.Schema({
     Email:{type:String , require:true},
     Password:{type:String , require:true},
     Phone:{type:String , require:true},
+    City:{type:String , require:true},
+    State:{type:String , require:true},
+    Department:{type:String , require:true},
     Verified:{type:Boolean , default:false},
-    Department:[{
-        Title:{type:String , require:true},
-        Experience:{type:String , require:true},
-    }],
+    TimeSlot:[
+        {
+            Date:{type:String,required:true},
+            Time:{type:String,required:true},
+        }
+    ],
     Appointments:[
         {
             Appointment_Date:{type:String,required:true},
@@ -23,7 +28,7 @@ const DoctorSchema = new mongoose.Schema({
         }
     ]
 
-}, { collection: 'name$' })
+}, { collection: 'Doctor' })
 
 const model = mongoose.model('DoctorSchema', DoctorSchema);
 module.exports = model;

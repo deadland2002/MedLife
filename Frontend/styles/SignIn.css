@@ -28,16 +28,19 @@
     gap: 20px;
 }
 
-.SignInParent .left{
-    flex: 1 0 50px;
-    background-color: var(--lightSecondary);
-    color: var(--lightPrimary);
-}
-
 .SignInParent .left , .SignInParent .right{
     height: calc(100% - 20px);
     border-radius: 20px;
     padding: 10px 10px;
+}
+
+.SignInParent .left{
+    display: flex;
+    flex: 1 0 50px;
+    background-color: var(--lightSecondary);
+    color: var(--lightPrimary);
+    justify-content: center;
+    align-items: center;
 }
 
 .signInForm div{
