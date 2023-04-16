@@ -51,7 +51,6 @@ const SignIn = () => {
       subBtn.current.innerText = "Not Verified";
       setVerified(false);
     }
-    console.log(response);
   };
 
   const handleChange = (e) => {

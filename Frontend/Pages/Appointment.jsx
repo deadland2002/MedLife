@@ -63,12 +63,12 @@ const Appointment = () => {
 
       {isFetching
         ? [
-          <div className="PreloaderParent">
-          <PreLoader />
+          <div key={6756} className="PreloaderParent">
+          <PreLoader key={34234} />
           </div>
       ]
         : !isFetching && user
-        ? [<AppointmentComponent user={user} setUser={setUser} key={3} />]
+        ? [<AppointmentComponent user={user} setUser={setUser} key={543} />]
         : []}
     </>
   );

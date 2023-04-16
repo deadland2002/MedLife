@@ -2,6 +2,7 @@ const { model } = require("mongoose");
 const Database = require("../Helper/Database.js");
 const UserValidate = require("../Helper/UserValidate.js");
 const DoctorValidate = require("../Helper/DoctorValidate.js");
+const QueryValidate = require("../Helper/Query.js");
 const { validate } = require("../Schema/UserSchema.js");
 
 const link = (app) => {
@@ -27,6 +28,20 @@ const link = (app) => {
   
   app.post("/api/DoctorSignIn", async function (req, res) {
     DoctorValidate.SignIn(req,res);
+  });
+  
+  app.get("/api/DoctorSignUp", async function (req, res) {
+    DoctorValidate.SignUp(req,res);
+  });
+  
+  
+  app.post("/api/SearchAppointment", async function (req, res) {
+    QueryValidate.SearchAppointment(req,res);
+  });
+  
+  
+  app.post("/api/BookAppointment", async function (req, res) {
+    QueryValidate.BookAppointment(req,res);
   });
 };
 

@@ -11,6 +11,8 @@ const Schema = new mongoose.Schema({
     Appointments:[
         {
             Appointment_Date:{type:String,required:true},
+            Appointment_Time:{type:String,required:true},
+            Appointment_City:{type:String,required:true},
             Doctor:{type:String,required:true},
             Booked_Date:{type:Date,default:Date.now()},
             Visited:{type:Boolean,default:false},
