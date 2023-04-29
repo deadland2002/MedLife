@@ -7,9 +7,15 @@ const NodeMailer = require("./NodeMailer.js")
 async function VerifyUser(email, pass) {
   try {
     const user = await userSchema.findOne({ Email: email });
+
+    console.log(user);
+
     if (!user) return false;
+
     var pass = await bcrypt.compare(pass, user.Password);
+    
     if (!pass) return false;
+    
     return user;
   } catch (err) {
     console.log("Verify User - ", err);
@@ -21,6 +27,8 @@ async function SetOtp(email) {
     const otp = await OtpSchema.findOne({ Email: email });
     const OTP = Math.floor(1000000 + Math.random() * 9000000).toString();
     const mailWait = await NodeMailer.SendOtpUsingMail(OTP);
+
+    console.log(mailWait , OTP , Otp);
 
     if(!mailWait){
       return false;
@@ -88,9 +96,9 @@ module.exports = {
           console.log(pass);
 
           const user = await userSchema.create({
-            Email: email.toUpperCase(),
             FName: fname.toUpperCase(),
             SName: sname.toUpperCase(),
+            Email: email,
             Phone: phone,
             Password: pass,
             Gender: gender.toUpperCase(),
@@ -138,7 +146,7 @@ module.exports = {
             if(OtpStatus){
               return res.header(200).json({ status: 201 });
             }else{
-              return res.header(200).json({ status: 203 });
+              return res.header(200).json({ status: 206 });
             }
           } else {
             return res.header(200).json({ status: 203 });
