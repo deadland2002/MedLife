@@ -2,6 +2,7 @@ const userSchema = require("../Schema/UserSchema.js");
 const OtpSchema = require("../Schema/OtpSchema.js");
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const NodeMailer = require("./NodeMailer.js")
 
 async function VerifyUser(email, pass) {
   try {
@@ -19,15 +20,24 @@ async function SetOtp(email) {
   try {
     const otp = await OtpSchema.findOne({ Email: email });
     const OTP = Math.floor(1000000 + Math.random() * 9000000).toString();
+    const mailWait = await NodeMailer.SendOtpUsingMail(OTP);
+
+    if(!mailWait){
+      return false;
+    }
 
     if (!otp) {
       const expireAt = (Date.now() + 1000 * 60 * 30).toString();
+      
+      
       await OtpSchema.create({ Email: email, Otp: OTP, Exp: expireAt });
+
     } else {
       await OtpSchema.updateOne({ Email: email }, { $set: { Otp: OTP } });
     }
 
-    console.log(OTP);
+    return true;
+    
   } catch (err) {
     console.log("Generate Otp - ", err);
   }
@@ -123,9 +133,13 @@ module.exports = {
             }
           } else if (user && user.Verified) {
             return res.header(200).json({ status: 205 });
-          } else if(user){
-            await SetOtp(email);
-            return res.header(200).json({ status: 201 });
+          } else if (user) {
+            const OtpStatus = await SetOtp(email);
+            if(OtpStatus){
+              return res.header(200).json({ status: 201 });
+            }else{
+              return res.header(200).json({ status: 203 });
+            }
           } else {
             return res.header(200).json({ status: 203 });
           }
@@ -149,19 +163,13 @@ module.exports = {
           } else {
             return res.header(200).json({ status: 203 });
           }
-        } catch (err) {
-        }
+        } catch (err) {}
       }
     } catch (err) {}
     return res.header(201).json({ status: 401 });
   },
 
   Test: (req, res) => {
-    res.send(`<form action='/SignIn' method='post'>
-      <input type='text' name='email' />
-      <input type='text' name='password' />
-      <button type='submit'>Submit
-      </button>
-      </form>  `);
+    return res.send("<h1>Server running</h1>");
   },
 };

@@ -32,20 +32,14 @@ app.use(express.static("Public"));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Databse.connect();
 
+
+
 links(app);
+
+
+
 
 app.listen(2000, function (err) {
   if (err) {

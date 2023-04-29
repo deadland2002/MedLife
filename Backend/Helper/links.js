@@ -4,10 +4,19 @@ const UserValidate = require("../Helper/UserValidate.js");
 const DoctorValidate = require("../Helper/DoctorValidate.js");
 const QueryValidate = require("../Helper/Query.js");
 const { validate } = require("../Schema/UserSchema.js");
+const Nodemailer = require("./NodeMailer.js");
 
 const link = (app) => {
   app.get("/", function (req, res) {
-    UserValidate.Test(req,res);
+    return UserValidate.Test(req,res);
+  });
+  
+  app.get("/api/DoctorSignUp", async function (req, res) {
+    DoctorValidate.SignUp(req,res);
+  });
+  
+  app.get("/api/test", async function (req, res) {
+    return res.json({data : await Nodemailer.SendOtpUsingMail(111111)});
   });
 
   app.post("/SignIn", async function (req, res) {
@@ -30,9 +39,6 @@ const link = (app) => {
     DoctorValidate.SignIn(req,res);
   });
   
-  app.get("/api/DoctorSignUp", async function (req, res) {
-    DoctorValidate.SignUp(req,res);
-  });
   
   
   app.post("/api/SearchAppointment", async function (req, res) {
