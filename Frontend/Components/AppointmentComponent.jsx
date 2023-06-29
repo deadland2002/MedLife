@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Location from "../data/Location.json";
 import { Department } from "../data/Department.js";
 import "../styles/Appointment.css";
+import { useSearchParams } from "react-router-dom";
 
 const AppointmentComponent = ({ user, setUser }) => {
   const [Query, setQuery] = useState({
@@ -10,14 +11,39 @@ const AppointmentComponent = ({ user, setUser }) => {
     department: "",
     Date_of_Appointment: "",
   });
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const State = searchParams.get("State");
+    const City = searchParams.get("City");
+    const Department = searchParams.get("Department");
+    const Date = searchParams.get("Date");
+
+    if (State!="null" && City && Department && Date) {
+      setQuery((prev) => ({
+        ...prev,
+        ["state"]: State,
+        ["city"]: City,
+        ["department"]: Department,
+        ["Date_of_Appointment"]: Date,
+      }));
+      console.log(State,City,Department,Date);
+    }
+
+    setQuery((prev) => ({ ...prev, token: user.token }));
+  }, []);
+
+  useEffect(() => {
+    setSearchParams(
+      `State=${Query.state}&City=${Query.city}&Department=${Query.department}&Date=${Query.Date_of_Appointment}`
+    );
+  }, [Query]);
+
   const [result, setResult] = useState({ state: false, value: [] });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setQuery((prev) => ({ ...prev, [name]: value }));
-
-    if (name == "department")
-      setQuery((prev) => ({ ...prev, token: user.token }));
   };
 
   const GetToday = (offset = 0) => {
@@ -53,7 +79,7 @@ const AppointmentComponent = ({ user, setUser }) => {
         // location.reload();
       }
 
-      console.log(response);
+      console.log(response, Query);
     }
   };
 
@@ -182,12 +208,12 @@ const AppointmentComponent = ({ user, setUser }) => {
                         <span>{single[4][1]}</span>
                         <span>{single[5]}</span>
                         <span
-                          className={single[8]?"booked":"booknow"}
+                          className={single[8] ? "booked" : "booknow"}
                           onClick={() => {
-                            !single[8]? handleBookAppointment(single) : [];
+                            !single[8] ? handleBookAppointment(single) : [];
                           }}
                         >
-                          {single[8]?"Booked":"Book"}
+                          {single[8] ? "Booked" : "Book"}
                         </span>
                       </div>
                     );

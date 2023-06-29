@@ -60,6 +60,7 @@ module.exports = {
               TimeSlot: { $elemMatch: { Date: day } },
             }).lean();
 
+
             var arr = [];
 
             if (result) {
@@ -101,14 +102,33 @@ module.exports = {
                 }
               }
             }
+
+
             return res.header(200).json({ status: 200, result: arr });
+
+
+
           }
         } catch (err) {
+
+
+
           console.log(err);
+        
+        
+        
+        
         }
       }
     } catch (err) {
+
+
+
       console.log(err);
+
+
+
+
     }
     return res.header(201).json({ status: 401 });
   },

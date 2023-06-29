@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../src/App.jsx";
 import { SignInRequired, AppointmentComponent ,PreLoader} from "../Components";
 import "../styles/Appointment.css"
-
 const Appointment = () => {
   const { user, setUser } = useContext(UserContext);
   const [isFetching, setIfFetching] = useState(true);
@@ -13,9 +12,10 @@ const Appointment = () => {
     token = token.filter((item) => {
       return item.length >= 5;
     });
-
+    
     async function validateToken(temp) {
       try {
+        
         const response = await fetch("http://localhost:2000/VerifyToken", {
           method: "POST",
           headers: {
@@ -23,7 +23,7 @@ const Appointment = () => {
           },
           body: JSON.stringify({ token: temp[1] }),
         }).then((res) => res.json());
-
+        
         if (response.status == 200) {
           setUser((prev) => ({
             ...prev,
@@ -31,24 +31,24 @@ const Appointment = () => {
             ...response.user,
           }));
         }
+        
       } catch (err) {
         console.log(err);
       }
-      setTimeout(()=>{
-        setIfFetching(false);
-      },2000)
+      setIfFetching(false);
     }
-
+    
     if (token && token.length != 0) {
       for (var i of token) {
-        if (i.startsWith("token=")) {
-          var temp = i.split("=");
+        var temp = i.split("=");
+        if (temp[0].trim() == "token") {
           validateToken(temp);
         }
       }
     } else {
       setIfFetching(false);
     }
+
   }, []);
 
   return (

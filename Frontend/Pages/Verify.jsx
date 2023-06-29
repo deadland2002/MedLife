@@ -17,6 +17,11 @@ const Verify = () => {
       password: data.password,
     };
 
+    if(subBtn.current)
+    subBtn.current.innerText = "Sending...";
+    if(OtpBtn.current)
+    OtpBtn.current.innerText = "Sending...";
+
     const response = await fetch("http://localhost:2000/Verify", {
       method: "POST",
       headers: {

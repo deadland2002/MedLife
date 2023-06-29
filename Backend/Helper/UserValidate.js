@@ -8,8 +8,6 @@ async function VerifyUser(email, pass) {
   try {
     const user = await userSchema.findOne({ Email: email });
 
-    console.log(user);
-
     if (!user) return false;
 
     var pass = await bcrypt.compare(pass, user.Password);
@@ -19,6 +17,7 @@ async function VerifyUser(email, pass) {
     return user;
   } catch (err) {
     console.log("Verify User - ", err);
+    return false
   }
 }
 
@@ -26,9 +25,7 @@ async function SetOtp(email) {
   try {
     const otp = await OtpSchema.findOne({ Email: email });
     const OTP = Math.floor(1000000 + Math.random() * 9000000).toString();
-    const mailWait = await NodeMailer.SendOtpUsingMail(OTP);
-
-    console.log(mailWait , OTP , Otp);
+    const mailWait = await NodeMailer.SendOtpUsingMail(OTP,email);
 
     if(!mailWait){
       return false;
@@ -48,6 +45,7 @@ async function SetOtp(email) {
     
   } catch (err) {
     console.log("Generate Otp - ", err);
+    return false;
   }
 }
 

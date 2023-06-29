@@ -44,7 +44,7 @@ const Register = () => {
       subBtn.current.classList.add("verified");
       subBtn.current.innerText = "verified";
       setTimeout(() => {
-        location.href = "/SignIn";
+        location.href = "/Verify";
       }, 1000);
     } else if (response.status == 404) {
       subBtn.current.classList.remove("verified");
